@@ -89,12 +89,12 @@ public class Neo4jClient extends DB {
    * @param label  Table name
    * @param key    Record key of the node to read
    * @param fields Fields to read
-   * @param result A Vector of HashMaps, where each HashMap is a set field/value
+   * @param result A Vector of Map, where each Map is a set field/value
    *               pairs for one record
    * @return Zero on success, a non-zero error code on error
    */
   @Override
-  public Status read(String label, String key, Set<String> fields, HashMap<String, ByteIterator> result) {
+  public Status read(String label, String key, Set<String> fields, Map<String, ByteIterator> result) {
     // starting transaction
     try (Transaction tx = graphDbInstance.beginTx()) {
       Node n = graphDbInstance.findNode(Label.label(label), NODE_ID, key);
@@ -165,7 +165,7 @@ public class Neo4jClient extends DB {
    * @return Zero on success, a non-zero error code on error
    */
   @Override
-  public Status update(String label, String key, HashMap<String, ByteIterator> values) {
+  public Status update(String label, String key, Map<String, ByteIterator> values) {
     // starting transaction
     try (Transaction tx = graphDbInstance.beginTx()) {
       // finding node
@@ -194,7 +194,7 @@ public class Neo4jClient extends DB {
    * @return Zero on success, a non-zero error code on error
    */
   @Override
-  public Status insert(String label, String key, HashMap<String, ByteIterator> values) {
+  public Status insert(String label, String key, Map<String, ByteIterator> values) {
     // starting transaction
     try (Transaction tx = graphDbInstance.beginTx()) {
       // inserting node and setting up identifier
